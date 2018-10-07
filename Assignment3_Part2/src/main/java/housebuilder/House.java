@@ -1,17 +1,17 @@
 package housebuilder;
 
 public class House {
-	int pricePerSquareMetre, squareMetres;
+	int pricePerSquareMetre, squareMetres, bedrooms, bathrooms, priceBedroom, priceBathroom, totalPrice;
 	String houseType;
 
 	public House(int squareMetres, String houseType) {
 		setHouseType(houseType);
 		setSquareMetres(squareMetres);
 		setPricePerSquareMetre(getHouseType());
-	}
-
-	public int getPricePerSquareMetre() {
-		return pricePerSquareMetre;
+		setBedrooms(0);
+		setBathrooms(0);
+		this.priceBedroom = 25000;
+		this.priceBathroom = 20000;
 	}
 
 	public void setPricePerSquareMetre(String type) {
@@ -25,6 +25,18 @@ public class House {
 			setHouseType("basic");
 			this.pricePerSquareMetre = 620;
 		}
+	}
+	
+	public boolean withinBudget(int budget) {
+		return getTotalPrice() <= budget;
+	}
+
+	public int getTotalPrice() {
+		return (getPricePerSquareMetre() * getSquareMetres()) + (getBedrooms() * priceBedroom) + (getBathrooms() * priceBathroom);
+	}
+	
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public String getHouseType() {
@@ -42,12 +54,26 @@ public class House {
 	public void setSquareMetres(int squareMetres) {
 		this.squareMetres = squareMetres;
 	}
-
-	public boolean withinBudget(int budget) {
-		return getTotalPrice() <= budget;
+	
+	public int getBedrooms() {
+		return bedrooms;
 	}
 
-	public int getTotalPrice() {
-		return pricePerSquareMetre * squareMetres;
+	public void setBedrooms(int bedrooms) {
+		this.bedrooms = bedrooms;
 	}
+
+	public int getBathrooms() {
+		return bathrooms;
+	}
+
+	public void setBathrooms(int bathrooms) {
+		this.bathrooms = bathrooms;
+	}
+
+	public int getPricePerSquareMetre() {
+		return pricePerSquareMetre;
+	}
+
+	
 }
